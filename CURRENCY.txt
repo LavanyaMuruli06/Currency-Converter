@@ -1,0 +1,198 @@
+JAVA
+
+package com.example.cu;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+
+    Spinner sp1,sp2;
+    EditText ed1;
+    Button b1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        sp1 = findViewById(R.id.spfrom);
+        sp2 = findViewById(R.id.spto);
+        ed1 = findViewById(R.id.txtamt);
+        b1 = findViewById(R.id.btn1);
+
+
+        String[] from = {"USD"};
+        ArrayAdapter ad = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,from);
+        sp1.setAdapter(ad);
+
+
+        String[] to = {"Indian Rupees","Srilankan Rupees"};
+        ArrayAdapter ad1 = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,to);
+        sp2.setAdapter(ad1);
+
+
+        b1 = findViewById(R.id.btn1);
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Double tot;
+
+                Double amt = Double.parseDouble(ed1.getText().toString());
+
+                if(sp1.getSelectedItem().toString() == "USD" && sp2.getSelectedItem().toString() == "Indian Rupees")
+                {
+                    tot = amt * 70.0;
+                    Toast.makeText(getApplicationContext(),tot.toString(),Toast.LENGTH_LONG).show();
+                }
+                else if(sp1.getSelectedItem().toString() == "USD" && sp2.getSelectedItem().toString() == "Srilankan Rupees")
+                {
+                    tot = amt * 179.0;
+                    Toast.makeText(getApplicationContext(),tot.toString(),Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+}
+
+
+
+
+XML
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Currency Converter"
+            android:textSize="30sp"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter the Amount"
+            android:textSize="30sp"
+            />
+
+        <EditText
+            android:id="@+id/txtamt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From"
+            android:textSize="30sp"
+            />
+
+        <Spinner
+            android:id="@+id/spfrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To"
+            android:textSize="30sp"
+            />
+
+        <Spinner
+            android:id="@+id/spto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+
+            />
+
+
+    </LinearLayout>
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONVERT"
+
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
